@@ -53,3 +53,48 @@ repositories {
 解决方法：  
 1.Android Studio 会提示你是否移除 .iml 文件，如果觉得这个模块没有用到，可以点击移除。
 
+### 5.Gradle 编译关键词替换警告。
+
+```
+WARNING: Configuration 'compile' is obsolete and has been replaced with 'implementation'.
+WARNING: Configuration 'androidTestCompile' is obsolete and has been replaced with 'androidTestImplementation'.
+WARNING: Configuration 'androidTestApi' is obsolete and has been replaced with 'androidTestImplementation'.
+WARNING: Configuration 'testCompile' is obsolete and has been replaced with 'testImplementation'.
+WARNING: Configuration 'testApi' is obsolete and has been replaced with 'testImplementation'.
+```
+
+问题原因：  
+1.使用 Android Studio 3.1 之后编译项目就有此种提示。
+
+解决方法：  
+1.将相关的 Gradle 文件中的关键词修改成提示的词就行了。
+
+示例：  
+
+```
+dependencies {
+            compile fileTree(dir: 'libs', include: ['*.jar'])
+            compile 'com.android.support:appcompat-v7:27.1.0'
+            compile 'com.android.support.constraint:constraint-layout:1.0.2'
+            testImplementation 'junit:junit:4.12'
+            androidTestImplementation 'com.android.support.test:runner:1.0.1'
+            androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    }
+
+```
+
+修改成：
+
+```
+dependencies {
+            implementation fileTree(dir: 'libs', include: ['*.jar'])
+            implementation 'com.android.support:appcompat-v7:27.1.0'
+            implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+            testImplementation 'junit:junit:4.12'
+            androidTestImplementation 'com.android.support.test:runner:1.0.1'
+            androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    }
+```
+
+
