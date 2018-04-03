@@ -97,4 +97,20 @@ dependencies {
     }
 ```
 
+### 6.无法找到 Could not find com.android.support:multidex:1.0.3
+
+
+```
+Could not find com.android.support:multidex:1.0.3
+```
+
+解决方法
+
+```
+repositories {
+    maven {
+        url 'https://maven.google.com'
+    }
+}
+```
 
