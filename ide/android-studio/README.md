@@ -9,3 +9,9 @@
 ```
 Import project (Gradle,Eclipse ADT,etc.)
 ```
+
+## 2.AndroidManifest.xml 文件中声明 Activity 出现：is not a concrete class.
+
+原因分析：一般情况下这个 Activity 是一个抽象类：abstract
+
+解决方法：移除此类 Activity 的声明即可。
