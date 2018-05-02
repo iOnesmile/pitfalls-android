@@ -18,6 +18,23 @@ To suppress this warning, remove "buildToolsVersion '25.0.0'" from your build.gr
 1.可能是你在 build.gradle 文件中声明了包名，AndroidManifest.xml 文件中也声明了包名，只是在 AndroidManifest.xml 文件修改了。build.gradle 里面的包名优先。
 
 解决方法：  
-2.修改 build.gradle 里面的应用包名。
+1.修改 build.gradle 里面的应用包名。
+
+### 3.运行 gradlew 命令，提示权限被拒绝。
+
+```
+ifeegoo:android-bluetooth-color-lamp-chipsguide-ilight ifeegoo$ ./gradlew assembleDebug --info
+-bash: ./gradlew: Permission denied
+```
+
+问题分析：  
+1.没有给出相关的读写权限。
+
+解决方法：  
+1.通过命令行修改相关权限。
+
+```
+ifeegoo:android-bluetooth-color-lamp-chipsguide-ilight ifeegoo$ chmod +x gradlew
+```
 
 
