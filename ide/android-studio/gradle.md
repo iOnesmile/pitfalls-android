@@ -37,4 +37,56 @@ ifeegoo:android-bluetooth-color-lamp-chipsguide-ilight ifeegoo$ ./gradlew assemb
 ifeegoo:android-bluetooth-color-lamp-chipsguide-ilight ifeegoo$ chmod +x gradlew
 ```
 
+### 4.编译出现无法解析模块
+
+```
+Caused by: org.gradle.api.UnknownProjectException: Cannot evaluate module UpdateLibrary : Configuration with name 'default' not found.
+```
+
+问题分析：  
+1.之前删除的模块，在 settings.gradle 文件中并没有移除掉：
+
+```
+include ':app', ':BaseCloudMusicResource', ':UpdateLibrary', ':BaiduSDK_LibProject', ':bdSpeechLibrary'
+```
+
+解决方法：  
+1.移除掉已经删除的模块即可。
+
+```
+include ':app', ':BaseCloudMusicResource', ':bdSpeechLibrary'
+```
+
+### 5.提示 apt 版本不适配。
+
+```
+Error:android-apt plugin is incompatible with the Android Gradle plugin. Please use 'annotationProcessor' configuration instead.
+```
+
+问题分析：  
+1.Gradle 版本的问题。
+
+解决方法：  
+1.更改 Gradle 对应的版本。
+
+ Android Studio 3.1 + macOS 10.13.
+
+修改以下两个文件：
+
+1.`gradle-wrapper.properties`
+
+`distributionUrl=https\://services.gradle.org/distributions/gradle-4.4-all.zip`
+
+**to**
+
+`distributionUrl=https\://services.gradle.org/distributions/gradle-2.10-all.zip`
+
+2.`build.gradle(Module: app)`
+
+`classpath 'com.android.tools.build:gradle:3.1.0'`
+
+**to**
+
+`classpath 'com.android.tools.build:gradle:2.1.2'`
+
 
