@@ -89,4 +89,25 @@ Error:android-apt plugin is incompatible with the Android Gradle plugin. Please 
 
 `classpath 'com.android.tools.build:gradle:2.1.2'`
 
+### 6.编译 Release 包的时候，提示版本冲突。
+
+```
+	Element uses-permission#android.permission.WRITE_EXTERNAL_STORAGE at AndroidManifest.xml:38:5-81 duplicated with element declared at AndroidManifest.xml:24:5-81
+/Users/ifeegoo/workspace/android/android-bluetooth-color-lamp-chipsguide-ilight/app/src/none/AndroidManifest.xml:5:5-30 Error:
+	Attribute manifest@versionCode value=(183) from AndroidManifest.xml:5:5-30
+	is also present at AndroidManifest.xml:5:5-30 value=(182).
+	Attributes of <manifest> elements are not merged.
+/Users/ifeegoo/workspace/android/android-bluetooth-color-lamp-chipsguide-ilight/app/src/none/AndroidManifest.xml:6:5-31 Error:
+	Attribute manifest@versionName value=(1.83) from AndroidManifest.xml:6:5-31
+	is also present at AndroidManifest.xml:6:5-31 value=(1.82).
+	Attributes of <manifest> elements are not merged.
+
+```
+
+原因分析：  
+1.如果你的项目中包含多个 AndroidManifest.xml，无论是多渠道的目录底下，还是其他第三方模块的目录底下的，编译的时候，会合并 各个 AndroidManifest.xml 文件中的各个元素，当发现相同元素的时候，如果数值有冲突，就会编译冲突。
+
+解决方法：  
+1.相同元素，保持相同值。相同元素，多渠道不同值，请采用多渠道来避开。
+
 
