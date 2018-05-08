@@ -110,4 +110,40 @@ Error:android-apt plugin is incompatible with the Android Gradle plugin. Please 
 解决方法：  
 1.相同元素，保持相同值。相同元素，多渠道不同值，请采用多渠道来避开。
 
+### 7.配置多渠道，meta-data 数据类型问题。
+
+```AndroidManifest.xml
+        <meta-data
+            android:name="mi_push_appid"
+            android:value="${mi_push_appid_value}" />
+
+        <meta-data
+            android:name="mi_push_appkey"
+            android:value="${mi_push_appkey_value}" />
+```
+
+``` build.gradle
+self {
+      manifestPlaceholders = [mi_push_appid_value : "1717000", mi_push_appkey_value:"33333333"]
+     }
+```
+
+原因分析  
+1.以上内容会报错，实际编译成功之后，mi_push_appid_value 和 mi_push_appkey_value 的值会被当成 float 类型。代码中获取相关参数时就会报错。
+
+解决方法：  
+1.对 meta-data value 值进行 `\0` 标记。
+
+```AndroidManifest.xml
+        <meta-data
+            android:name="mi_push_appid"
+            android:value="${mi_push_appid_value}\0" />
+
+        <meta-data
+            android:name="mi_push_appkey"
+            android:value="${mi_push_appkey_value}\0" />
+```
+
+```
+
 
