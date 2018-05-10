@@ -154,16 +154,17 @@ self {
 
 解决方法：  
 1.在 build.gradle 文件的最顶层追加以下编译代码：  
+
 ```
 buildscript {
     repositories {
         google() // Gradle 4.0+
         maven { url "https://maven.google.com" } // Gradle < 4.0
     }
-
     dependencies {
         classpath "com.android.tools.build:gradle:3.1.2"
     }
 }
 ```
+
 参考资料：https://stackoverflow.com/questions/24795079/error1-0-plugin-with-id-com-android-application-not-found/25232725#25232725
