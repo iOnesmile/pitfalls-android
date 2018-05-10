@@ -144,8 +144,6 @@ self {
             android:value="${mi_push_appkey_value}\0" />
 ```
 
-```
-
 ### 8.编译提示错误：Plugin with id 'com.android.application' not found
 
 
