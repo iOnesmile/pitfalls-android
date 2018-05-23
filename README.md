@@ -135,9 +135,9 @@ Gradle Plugin:2.1.2
 #### 解决方法：
 
 可采用以下方法解决尝试解决：  
-1°.重启 Android Studio  
-2°.重启 macOS  
-3°.重装 Android Studio
+1).重启 Android Studio  
+2).重启 macOS  
+3).重装 Android Studio
 ***
 
 
