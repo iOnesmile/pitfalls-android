@@ -6,6 +6,7 @@
 android.util.SuperNotCalledException: Activity {*} did not call through to super.onCreate()
 ```
 
+
 问题分析：  
 1.在 super.onCreate() 方法调用之前，有其他的代码终止，导致此方法不能执行。
 
