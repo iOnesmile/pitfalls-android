@@ -3,13 +3,13 @@
 <img src="logo-pitfalls-android.png" width="" height="200"/>
 
 
-## 正在进行内容与格式的全部内容整理，敬请期待！
+## 正在进行全部内容的格式整理，敬请期待！
 
 #### 其他 pitfalls 系列：[Pitfalls Series](https://github.com/42Chapters/pitfalls)
 
 ### 1.如何进行仓库内容预览与搜索？
 
-**预览：GitHub [pitfalls-android @ GitBook](https://42chapters.gitbook.io/pitfalls-android/)**
+**预览：GitBook [pitfalls-android @ GitBook](https://42chapters.gitbook.io/pitfalls-android/)**
 
 **搜索：在 GitHub 中搜索当前仓库，在 GitBook 中搜索当前电子书（推荐）。**
 
