@@ -10,13 +10,7 @@
 Import project (Gradle,Eclipse ADT,etc.)
 ```
 
-## 2.AndroidManifest.xml 文件中声明 Activity 出现：is not a concrete class.
 
-备注：虽然提示此类错误，但是项目还是可以 Build，没有太大问题。
-
-原因分析：一般情况下这个 Activity 是一个抽象类：abstract
-
-解决方法：移除此类 Activity 的声明即可。
 
 
 
@@ -25,27 +19,7 @@ Import project (Gradle,Eclipse ADT,etc.)
 
 ## IDE 配置问题
 
-### 1. Gradle 提示 google() 无法找到。
 
-```
-Gradle sync failed: Could not find method google() for arguments [] on repository container.
-Consult IDE log for more details (Help | Show Log) (1m 2s 468ms)
-```
-
-问题原因：
-Gradle 1.7 里面追加  jcenter() ，在之前的版本都会有这样的异常。
-
-解决方法：
-可以通过以下方式追加 jcenter()
-
-```
-repositories {
-maven {
-url "https://jcenter.bintray.com"
-}
-....
-}
-```
 
 ### 2. 提示文件资源文件名智能包含小写字母 a-z，数字 0-9 或者下划线。
 
@@ -59,13 +33,7 @@ url "https://jcenter.bintray.com"
 解决方法：
 文件名称修改成要求的命名规范。
 
-### 3.提示没有引入 Gradle 管理。
 
-问题原因：
-有的时候是由于没有在正确的根目录底下打开相关项目导致的。
-
-解决方法：
-在包含 build.gradle 文件的根目录中打开项目。
 
 
 ### 4.提示无法导入某个模块，因为 .iml 文件缺失。
@@ -76,65 +44,6 @@ url "https://jcenter.bintray.com"
 解决方法：
 1.Android Studio 会提示你是否移除 .iml 文件，如果觉得这个模块没有用到，可以点击移除。
 
-### 5.Gradle 编译关键词替换警告。
 
-```
-WARNING: Configuration 'compile' is obsolete and has been replaced with 'implementation'.
-WARNING: Configuration 'androidTestCompile' is obsolete and has been replaced with 'androidTestImplementation'.
-WARNING: Configuration 'androidTestApi' is obsolete and has been replaced with 'androidTestImplementation'.
-WARNING: Configuration 'testCompile' is obsolete and has been replaced with 'testImplementation'.
-WARNING: Configuration 'testApi' is obsolete and has been replaced with 'testImplementation'.
-```
-
-问题原因：
-1.使用 Android Studio 3.1 之后编译项目就有此种提示。
-
-解决方法：
-1.将相关的 Gradle 文件中的关键词修改成提示的词就行了。
-
-示例：
-
-```
-dependencies {
-compile fileTree(dir: 'libs', include: ['*.jar'])
-compile 'com.android.support:appcompat-v7:27.1.0'
-compile 'com.android.support.constraint:constraint-layout:1.0.2'
-testImplementation 'junit:junit:4.12'
-androidTestImplementation 'com.android.support.test:runner:1.0.1'
-androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-}
-
-```
-
-修改成：
-
-```
-dependencies {
-implementation fileTree(dir: 'libs', include: ['*.jar'])
-implementation 'com.android.support:appcompat-v7:27.1.0'
-implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-testImplementation 'junit:junit:4.12'
-androidTestImplementation 'com.android.support.test:runner:1.0.1'
-androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
-}
-```
-
-### 6.无法找到 Could not find com.android.support:multidex:1.0.3
-
-
-```
-Could not find com.android.support:multidex:1.0.3
-```
-
-解决方法
-
-```
-repositories {
-maven {
-url 'https://maven.google.com'
-}
-}
-```
 
 

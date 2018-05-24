@@ -1,61 +1,116 @@
-### 1.Android Gradle Plugin 与 Android SDK Build Tools 版本不兼容。
+# Gradle 
 
+### 1.修改应用包名失败
+
+#### 环境参数：
+
+```  
+System:macOS High Sierra Version 10.13
+IDE:Android Studio 3.1
+Gradle:2.10
+Gradle Plugin:2.1.2
 ```
-The specified Android SDK Build Tools version (25.0.0) is ignored, as it is below the minimum supported version (26.0.2) for Android Gradle Plugin 3.0.0.
-Android SDK Build Tools 26.0.2 will be used.
-To suppress this warning, remove "buildToolsVersion '25.0.0'" from your build.gradle file, as each version of the Android Gradle Plugin now has a default version of the build tools.
-Message{kind=WARNING, text=The specified Android SDK Build Tools version (25.0.0) is ignored, as it is below the minimum supported version (26.0.2) for Android Gradle Plugin 3.0.0.
-Android SDK Build Tools 26.0.2 will be used.
-To suppress this warning, remove "buildToolsVersion '25.0.0'" from your build.gradle file, as each version of the Android Gradle Plugin now has a default version of the build tools., sources=[Unknown source file, Unknown source file]}
+
+#### 问题分析：
+
+在 `build.gradle` 文件中声明了包名，`AndroidManifest.xml` 文件中也声明了包名，只在 `AndroidManifest.xml` 文件修改了包名，这种情况是不行的。`build.gradle` 里面的包名优先，`AndroidManifest.xml` 里面的包名和资源文件和包隔离有比较大关系。
+
+#### 解决方法：
+
+包名放到 `build.gradle` 里面声明，修改包名在 `build.gradle` 里面修改即可。`AndroidManifest.xml` 里面一般不用修改。
+
+### 2.运行 `gradlew` 命令，提示：`./gradlew: Permission denied`
+
+#### 环境参数：
+
+```  
+System:macOS High Sierra Version 10.13
+IDE:Android Studio 3.1
+Gradle:2.10
+Gradle Plugin:2.1.2
 ```
 
-解决方法：  
-1.按照相关提示，移除 build.gradle 文件中的 "buildToolsVersion '25.0.0'"。
-
-### 2.修改应用包名不成功。
-
-问题分析：  
-1.可能是你在 build.gradle 文件中声明了包名，AndroidManifest.xml 文件中也声明了包名，只是在 AndroidManifest.xml 文件修改了。build.gradle 里面的包名优先。
-
-解决方法：  
-1.修改 build.gradle 里面的应用包名。
-
-### 3.运行 gradlew 命令，提示权限被拒绝。
+#### 问题分析：
 
 ```
 ifeegoo:android-bluetooth-color-lamp-chipsguide-ilight ifeegoo$ ./gradlew assembleDebug --info
 -bash: ./gradlew: Permission denied
 ```
 
-问题分析：  
-1.没有给出相关的读写权限。
+没有针对 `gradlew` 命令给出读写权限。
 
-解决方法：  
-1.通过命令行修改相关权限。
+#### 解决方法：
+
+在终端中输入：`chmod +x gradlew` 来调整 `gradlew` 命令的权限：
 
 ```
 ifeegoo:android-bluetooth-color-lamp-chipsguide-ilight ifeegoo$ chmod +x gradlew
 ```
 
-### 4.编译出现无法解析模块
+
+### 3.编译提示：Cannot evaluate module
+
+#### 环境参数：
+
+```  
+System:macOS High Sierra Version 10.13
+IDE:Android Studio 3.1
+Gradle:2.10
+Gradle Plugin:2.1.2
+```
+
+#### 问题分析：
 
 ```
 Caused by: org.gradle.api.UnknownProjectException: Cannot evaluate module UpdateLibrary : Configuration with name 'default' not found.
 ```
 
-问题分析：  
-1.之前删除的模块，在 settings.gradle 文件中并没有移除掉：
+之前删除的模块，在 settings.gradle 文件中并没有移除掉：
 
 ```
 include ':app', ':BaseCloudMusicResource', ':UpdateLibrary', ':BaiduSDK_LibProject', ':bdSpeechLibrary'
 ```
 
-解决方法：  
-1.移除掉已经删除的模块即可。
+#### 解决方法：
+
+移除掉已经删除的模块即可。
 
 ```
 include ':app', ':BaseCloudMusicResource', ':bdSpeechLibrary'
 ```
+
+
+### 4.编译提示：
+
+#### 环境参数：
+
+[参数描述]
+
+#### 问题分析：
+
+[分析描述]
+
+#### 解决方法：
+
+[方法描述]
+
+### 5.[问题关键内容描述]
+
+#### 环境参数：
+
+[参数描述]
+
+#### 问题分析：
+
+[分析描述]
+
+#### 解决方法：
+
+[方法描述]
+
+
+
+
 
 ### 5.提示 apt 版本不适配。
 
@@ -166,3 +221,97 @@ buildscript {
 ```
 
 参考资料：https://stackoverflow.com/questions/24795079/error1-0-plugin-with-id-com-android-application-not-found/25232725#25232725
+
+
+### 1. Gradle 提示 google() 无法找到。
+
+```
+Gradle sync failed: Could not find method google() for arguments [] on repository container.
+Consult IDE log for more details (Help | Show Log) (1m 2s 468ms)
+```
+
+问题原因：
+Gradle 1.7 里面追加  jcenter() ，在之前的版本都会有这样的异常。
+
+解决方法：
+可以通过以下方式追加 jcenter()
+
+```
+repositories {
+maven {
+url "https://jcenter.bintray.com"
+}
+....
+}
+```
+
+
+### 3.提示没有引入 Gradle 管理。
+
+问题原因：
+有的时候是由于没有在正确的根目录底下打开相关项目导致的。
+
+解决方法：
+在包含 build.gradle 文件的根目录中打开项目。
+
+
+### 5.Gradle 编译关键词替换警告。
+
+```
+WARNING: Configuration 'compile' is obsolete and has been replaced with 'implementation'.
+WARNING: Configuration 'androidTestCompile' is obsolete and has been replaced with 'androidTestImplementation'.
+WARNING: Configuration 'androidTestApi' is obsolete and has been replaced with 'androidTestImplementation'.
+WARNING: Configuration 'testCompile' is obsolete and has been replaced with 'testImplementation'.
+WARNING: Configuration 'testApi' is obsolete and has been replaced with 'testImplementation'.
+```
+
+问题原因：
+1.使用 Android Studio 3.1 之后编译项目就有此种提示。
+
+解决方法：
+1.将相关的 Gradle 文件中的关键词修改成提示的词就行了。
+
+示例：
+
+```
+dependencies {
+compile fileTree(dir: 'libs', include: ['*.jar'])
+compile 'com.android.support:appcompat-v7:27.1.0'
+compile 'com.android.support.constraint:constraint-layout:1.0.2'
+testImplementation 'junit:junit:4.12'
+androidTestImplementation 'com.android.support.test:runner:1.0.1'
+androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+
+```
+
+修改成：
+
+```
+dependencies {
+implementation fileTree(dir: 'libs', include: ['*.jar'])
+implementation 'com.android.support:appcompat-v7:27.1.0'
+implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+testImplementation 'junit:junit:4.12'
+androidTestImplementation 'com.android.support.test:runner:1.0.1'
+androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+}
+```
+
+### 6.无法找到 Could not find com.android.support:multidex:1.0.3
+
+
+```
+Could not find com.android.support:multidex:1.0.3
+```
+
+解决方法
+
+```
+repositories {
+maven {
+url 'https://maven.google.com'
+}
+}
+```
