@@ -1,25 +1,29 @@
-# android-google-play-and-other-app-store-review-guidelines-tips
+# 应用市场
 
-## 1.多渠道打包 360 被拒    
-问题说明： 目前多渠道打包一般分有百度，360 等。但目前 360 和百度版本更新互不兼容，如果代码内部包含了非当前的版本更新代码就会被拒。  
-问题原因： 百度、360 版本更新代码互不兼容。
+## 多渠道
 
-解决方法： 目前多渠道打包还是不够完善的解决这个问题，目前的处理方式，就是打百度包去掉360更新，打 360 去掉百度更新。
+Android 应用市场众多，我们需要提供各种各样的多渠道包，目前我们需要发布到市场上的普通 App 需要提供以下多个渠道的包：
 
-## 2.Google Play Store 搜索不到上线的应用问题总结
+### 1.自家发布包。
 
-* 原因：当用户在 Google Play 上搜索或浏览应用以下载时，会根据哪些应用与其设备兼容来过滤搜索结果。例如，如果应用需要摄像头，Google Play 不会在没有摄像头的设备上显示该应用。这种过滤帮助开发者管理其应用的分发，并且有助于确保为用户提供最佳的体验。
+自家发布包主要用于商品宣传二维码下载安装，自家更新机制更新包，这种发布渠道是最重要的，因为其他第三方市场都是需要审核的，并不能立即上线，而且还有被下架的可能。
 
-* 过滤规则 ： https://developer.android.com/google/play/filters.html?hl=zh-cn
-需要硬件支持的权限也会默认进行设备兼容过滤；
+### 2.Google Play。
+
+对于出海的应用来说，这个渠道极为重要，必须认真对待。
+
+### 2.各大手机厂商应用商店。
+
+第二重要是各大手机厂商应用商店的渠道，很多普通手机用户都是习惯通过自家应用商店下载应用，目前我们需要在小米、OPPO、VIVO、华为、三星这几家应用商店上架。
+
+### 3.各大网络应用商店。
+
+最后我们还需要上架各大网络应用商店，比如：应用宝（腾讯），百度市场（百度），360 市场（360）。
+
+以上几种渠道基本上可以涵盖 90% 以上的 Android 市场了。
 
 
-* 如何去掉设备兼容过滤 ：
-Nexus 7 没有电话功能 ，然而在应用的 Manifest 文件里声明了电话相关的权限，希望不支持电话功能的设备也能搜索该 APP
-就在 Manifest 文件添加如下代码 ：
 
- <uses-feature android:name="android.hardware.telephony" android:required="false"/>
 
- 注：通过显式声明某项功能并加入 android:required="false" 属性，可以在 Google Play 上有效停用所有针对指定功能的过滤。
 
-更多功能声明 ： https://developer.android.com/guide/topics/manifest/uses-feature-element.html?hl=zh-cn#permissions-features
+
