@@ -9,9 +9,9 @@
 
 ### 1.如何进行仓库内容预览与搜索？
 
-预览：GitHub [pitfalls-android @ GitBook](https://42chapters.gitbook.io/pitfalls-android/)
+**预览：GitHub [pitfalls-android @ GitBook](https://42chapters.gitbook.io/pitfalls-android/)**
 
-搜索：在 GitHub 中搜索当前仓库，在 GitBook 中搜索当前电子书（推荐）。
+**搜索：在 GitHub 中搜索当前仓库，在 GitBook 中搜索当前电子书（推荐）。**
 
 ### 2.这个仓库是做什么的？
 
@@ -19,11 +19,11 @@
 
 ### 3.如何参与贡献此仓库？
 
-#### 1° 评估所提交“坑”的所属分类：
+#### 1°. 评估所提交“坑”的所属分类：
 
 该“坑”属于 SDK/IDE/Third-Party Library/... 哪一个，追加到对应的文件中。如果不清楚属于哪个分类，可以提交到：`temporary-contribution.md` 中，仓库管理员会再次评估分类。
 
-#### 2° 统一提交的文本格式：
+#### 2°. 统一提交的文本格式：
 
 文本排版格式要求参照：[中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines)
 
@@ -143,13 +143,14 @@ Gradle Plugin:2.1.2
 ***
 
 
-#### 3° 一般原则：
+#### 3°. 一般原则：
 
 A.能用图片的情况下，不要用视频。能用文本的情况下，不要用图片。  
 B.使用原始错误提示来作为问题关键内容描述，这个更方便别人查找参考。  
-C.有代码内容的部分，请使用代码块。
+C.有代码内容的部分，请使用代码块。  
+D.**如果想要引入视频和大量的图片，请引入外部链接。如果想要引入图片，少量的可以放置在 `img/` 目录底下，图片文件采用全部小写字母、横杠的命名方式。**
 
-#### 4° 不适合提交的内容：
+#### 4°. 不适合提交的内容：
 
 非 Android 内容，非 Android “坑”内容，例如：小知识点、专题总结等。本仓库只接受 Android 的“坑”并且包含解决方法的总结。
 
