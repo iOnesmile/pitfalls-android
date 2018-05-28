@@ -80,51 +80,24 @@ include ':app', ':BaseCloudMusicResource', ':bdSpeechLibrary'
 ```
 
 
-### 4.编译提示：
+### 4.编译提示：android-apt plugin is incompatible with the Android Gradle plugin. Please use 'annotationProcessor' configuration instead.
+
 
 #### 环境参数：
 
-[参数描述]
+```  
+System:macOS High Sierra Version 10.13
+IDE:Android Studio 3.1
+Gradle:4.4
+Gradle Plugin:3.1.0
+```
 
 #### 问题分析：
 
-[分析描述]
+Gradle 版本不匹配，可以通过修改 Gradle 版本和 Gradle 插件版本来解决问题。
 
 #### 解决方法：
 
-[方法描述]
-
-### 5.[问题关键内容描述]
-
-#### 环境参数：
-
-[参数描述]
-
-#### 问题分析：
-
-[分析描述]
-
-#### 解决方法：
-
-[方法描述]
-
-
-
-
-
-### 5.提示 apt 版本不适配。
-
-```
-Error:android-apt plugin is incompatible with the Android Gradle plugin. Please use 'annotationProcessor' configuration instead.
-```
-
-问题分析：  
-1.Gradle 版本的问题。
-
-解决方法：  
-1.更改 Gradle 对应的版本。
-
- Android Studio 3.1 + macOS 10.13.
 
 修改以下两个文件：
 
@@ -144,30 +117,44 @@ Error:android-apt plugin is incompatible with the Android Gradle plugin. Please 
 
 `classpath 'com.android.tools.build:gradle:2.1.2'`
 
-### 6.编译 Release 包的时候，提示版本冲突。
 
-```
-	Element uses-permission#android.permission.WRITE_EXTERNAL_STORAGE at AndroidManifest.xml:38:5-81 duplicated with element declared at AndroidManifest.xml:24:5-81
-/Users/ifeegoo/workspace/android/android-bluetooth-color-lamp-chipsguide-ilight/app/src/none/AndroidManifest.xml:5:5-30 Error:
-	Attribute manifest@versionCode value=(183) from AndroidManifest.xml:5:5-30
-	is also present at AndroidManifest.xml:5:5-30 value=(182).
-	Attributes of <manifest> elements are not merged.
-/Users/ifeegoo/workspace/android/android-bluetooth-color-lamp-chipsguide-ilight/app/src/none/AndroidManifest.xml:6:5-31 Error:
-	Attribute manifest@versionName value=(1.83) from AndroidManifest.xml:6:5-31
-	is also present at AndroidManifest.xml:6:5-31 value=(1.82).
-	Attributes of <manifest> elements are not merged.
+### 5.编译 Release 包提示：Attribute manifest@versionCode value=(183) from AndroidManifest.xml:5:5-30 is also present at AndroidManifest.xml:5:5-30 value=(182).Attributes of <manifest> elements are not merged.
 
+
+#### 环境参数：
+
+```  
+System:macOS High Sierra Version 10.13
+IDE:Android Studio 3.1
+Gradle:2.10
+Gradle Plugin:2.1.2
 ```
 
-原因分析：  
-1.如果你的项目中包含多个 AndroidManifest.xml，无论是多渠道的目录底下，还是其他第三方模块的目录底下的，编译的时候，会合并 各个 AndroidManifest.xml 文件中的各个元素，当发现相同元素的时候，如果数值有冲突，就会编译冲突。
+#### 问题分析：
 
-解决方法：  
-1.相同元素，保持相同值。相同元素，多渠道不同值，请采用多渠道来避开。
+Android 项目在编译的过程中，会将项目内部所有的 `AndroidManifest.xml` 文件进行合并，如果发现有相同元素不同的值，就会出现合并失败的情况。
 
-### 7.配置多渠道，meta-data 数据类型问题。
+#### 解决方法：
 
-```AndroidManifest.xml
+以上问题出现是为了尝试多渠道不同版本的应用生成，应该在 `build.gradle` 文件中采用 `flavor` 方式来处理，移除掉不同 `AndroidManifest.xml` 文件中的不同 versionCode 和 versionName。
+
+
+### 6.配置多渠道，meta-data 字符串数据类型被转化成了 Float 类型。
+
+#### 环境参数：
+
+```  
+System:macOS High Sierra Version 10.13
+IDE:Android Studio 3.1
+Gradle:2.10
+Gradle Plugin:2.1.2
+```
+
+#### 问题分析：
+
+`AndroidManifest.xml`
+
+```
         <meta-data
             android:name="mi_push_appid"
             android:value="${mi_push_appid_value}" />
@@ -177,17 +164,19 @@ Error:android-apt plugin is incompatible with the Android Gradle plugin. Please 
             android:value="${mi_push_appkey_value}" />
 ```
 
-``` build.gradle
+`build.gradle`
+
+``` 
 self {
-      manifestPlaceholders = [mi_push_appid_value : "1717000", mi_push_appkey_value:"33333333"]
+      		manifestPlaceholders = [mi_push_appid_value : "1717000", mi_push_appkey_value:"1313131313"]
      }
 ```
 
-原因分析  
-1.以上内容会报错，实际编译成功之后，mi_push_appid_value 和 mi_push_appkey_value 的值会被当成 float 类型。代码中获取相关参数时就会报错。
+像以上这种情况，Android Studio 编译一周，就会把上面的字符串类型的值转换成 Float 类型，数据就会发生变化。
 
-解决方法：  
-1.对 meta-data value 值进行 `\0` 标记。
+#### 解决方法：
+
+对 `meta-data` 的 value 值进行 `\0` 标记。
 
 ```AndroidManifest.xml
         <meta-data
@@ -199,14 +188,25 @@ self {
             android:value="${mi_push_appkey_value}\0" />
 ```
 
-### 8.编译提示错误：Plugin with id 'com.android.application' not found
 
+### 7.编译提示错误：Plugin with id 'com.android.application' not found
 
-原因分析：  
-1.编译工具存在一定的问题。
+#### 环境参数：
 
-解决方法：  
-1.在 build.gradle 文件的最顶层追加以下编译代码：  
+```  
+System:macOS High Sierra Version 10.13
+IDE:Android Studio 3.1
+Gradle:2.10
+Gradle Plugin:2.1.2
+```
+
+#### 问题分析：
+
+编译工具存在一定的问题。
+
+#### 解决方法：
+
+在 `build.gradle` 文件的最顶层追加以下编译代码：  
 
 ```
 buildscript {
@@ -220,42 +220,55 @@ buildscript {
 }
 ```
 
-参考资料：https://stackoverflow.com/questions/24795079/error1-0-plugin-with-id-com-android-application-not-found/25232725#25232725
 
+### 8.编译提示错误：Gradle sync failed: Could not find method google() for arguments [] on repository container.
 
-### 1. Gradle 提示 google() 无法找到。
+#### 环境参数：
+
+```  
+System:macOS High Sierra Version 10.13
+IDE:Android Studio 3.1
+Gradle:2.10
+Gradle Plugin:2.1.2
+```
+
+#### 问题分析：
+
+Gradle 1.7 里面追加 `jcenter()` ，在之前的版本都会有这样的异常。
 
 ```
 Gradle sync failed: Could not find method google() for arguments [] on repository container.
 Consult IDE log for more details (Help | Show Log) (1m 2s 468ms)
 ```
 
-问题原因：
-Gradle 1.7 里面追加  jcenter() ，在之前的版本都会有这样的异常。
+#### 解决方法：
 
-解决方法：
-可以通过以下方式追加 jcenter()
+可以通过以下方式追加 `jcenter()`：
+
 
 ```
 repositories {
-maven {
-url "https://jcenter.bintray.com"
-}
-....
+	maven {
+		url "https://jcenter.bintray.com"
+	}
 }
 ```
 
-
-### 3.提示没有引入 Gradle 管理。
-
-问题原因：
-有的时候是由于没有在正确的根目录底下打开相关项目导致的。
-
-解决方法：
-在包含 build.gradle 文件的根目录中打开项目。
+### 9.Gradle 编译警告：WARNING: Configuration '*' is obsolete and has been replaced with '**'.
 
 
-### 5.Gradle 编译关键词替换警告。
+#### 环境参数：
+
+```  
+System:macOS High Sierra Version 10.13
+IDE:Android Studio 3.1
+Gradle:2.10
+Gradle Plugin:2.1.2
+```
+
+#### 问题分析：
+
+使用 Android Studio 3.1 之后编译项目就有此种提示。
 
 ```
 WARNING: Configuration 'compile' is obsolete and has been replaced with 'implementation'.
@@ -265,22 +278,20 @@ WARNING: Configuration 'testCompile' is obsolete and has been replaced with 'tes
 WARNING: Configuration 'testApi' is obsolete and has been replaced with 'testImplementation'.
 ```
 
-问题原因：
-1.使用 Android Studio 3.1 之后编译项目就有此种提示。
+#### 解决方法：
 
-解决方法：
-1.将相关的 Gradle 文件中的关键词修改成提示的词就行了。
+将相关的 Gradle 文件中的关键词修改成提示的词就行了。
 
 示例：
 
 ```
 dependencies {
-compile fileTree(dir: 'libs', include: ['*.jar'])
-compile 'com.android.support:appcompat-v7:27.1.0'
-compile 'com.android.support.constraint:constraint-layout:1.0.2'
-testImplementation 'junit:junit:4.12'
-androidTestImplementation 'com.android.support.test:runner:1.0.1'
-androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+	compile fileTree(dir: 'libs', include: ['*.jar'])
+	compile 'com.android.support:appcompat-v7:27.1.0'
+	compile 'com.android.support.constraint:constraint-layout:1.0.2'
+	testImplementation 'junit:junit:4.12'
+	androidTestImplementation 'com.android.support.test:runner:1.0.1'
+	androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
 
 ```
@@ -289,29 +300,81 @@ androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1
 
 ```
 dependencies {
-implementation fileTree(dir: 'libs', include: ['*.jar'])
-implementation 'com.android.support:appcompat-v7:27.1.0'
-implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-testImplementation 'junit:junit:4.12'
-androidTestImplementation 'com.android.support.test:runner:1.0.1'
-androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
+	implementation fileTree(dir: 'libs', include: ['*.jar'])
+	implementation 'com.android.support:appcompat-v7:27.1.0'
+	implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+	testImplementation 'junit:junit:4.12'
+	androidTestImplementation 'com.android.support.test:runner:1.0.1'
+	androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
 ```
 
-### 6.无法找到 Could not find com.android.support:multidex:1.0.3
+### 10.编译提示错误：Could not find com.android.support:multidex:1.0.3
 
+#### 环境参数：
+
+```  
+System:macOS High Sierra Version 10.13
+IDE:Android Studio 3.1
+Gradle:2.10
+Gradle Plugin:2.1.2
+```
+
+#### 问题分析：
 
 ```
 Could not find com.android.support:multidex:1.0.3
 ```
 
+#### 解决方法：
+
 解决方法
 
 ```
 repositories {
-maven {
-url 'https://maven.google.com'
-}
+	maven {
+		url 'https://maven.google.com'
+	}
 }
 ```
+
+### 11.`MetaData` 获取的数据为空
+
+#### 环境参数：
+
+```  
+System:macOS High Sierra Version 10.13
+IDE:Android Studio 3.1
+compileSdkVersion:22
+```
+
+#### 问题分析：
+
+```
+String channel = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA).metaData.getString(name);
+```
+
+`metadata` 标签所在的位置层级不对。代码对应的 `metadata` 的层级是在 `application` 标签下面，而不是在 `manifest` 标签下面。
+
+#### 解决方法：
+
+将处在 `manifest` 标签下面的 `metadata` 移动到 `application` 标签底下。
+
+
+### 12.声明 `Activity` 出现警告提示：is not a concrete class
+
+#### 环境参数：
+
+```  
+System:macOS High Sierra Version 10.13
+IDE:Android Studio 3.1
+compileSdkVersion:22
+```
+
+#### 问题分析：
+
+虽然提示此类警告，但是项目还是可以编译通过的，没有太大问题。但是对于有追求的程序员，要避免所有的警告才是能力的体现。出现这种警告，是这个 `Activity` 为抽象类导致的。
+
+#### 解决方法：
+
+移除此抽象类 `Activity` 的声明即可。
