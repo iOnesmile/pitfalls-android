@@ -148,7 +148,8 @@ Gradle Plugin:2.1.2
 A.能用图片的情况下，不要用视频。能用文本的情况下，不要用图片。  
 B.使用原始错误提示来作为问题关键内容描述，这个更方便别人查找参考。  
 C.有代码内容的部分，请使用代码块。  
-D.**如果想要引入视频和大量的图片，请引入外部链接。如果想要引入图片，少量的可以放置在 `img/` 目录底下，图片文件采用全部小写字母、横杠的命名方式。**
+D.**如果想要引入视频和大量的图片，请引入外部链接。如果想要引入图片，少量的可以放置在 `img/` 目录底下，图片文件采用全部小写字母、横杠的命名方式。**  
+E.**代码的引入方式有两种，一种是采用双"```"引入，另外一种是采用缩进方式引入，为了保持格式的美观，我们统一采用前者方式，而不采用缩进的方式引入代码。**
 
 #### 4°. 目录结构和文件名称要求：
 
@@ -175,10 +176,10 @@ D.**如果想要引入视频和大量的图片，请引入外部链接。如果�
 * [IDE](ide/README.md)
 	* [Android Studio](ide/android-studio/README.md)
 		* [Gradle](ide/android-studio/gradle.md)
-		* [Android Manifest](ide/android-studio/android-manifest.md)
 * [SDK](sdk/README.md)
 	* [UI](sdk/ui.md)
 	* [异常](sdk/exception.md)
+	* [错误](sdk/error.md)
 * [Apk 安装包](apk/README.md)
 * [第三方库](third-party-library/README.md)
 	* [Tinker](third-party-library/tinker.md)  
