@@ -1,10 +1,18 @@
-## Tencent Tinker
+## Tinker
 
 ### 1.Could not get unknown property 'apkVariantData' for object of type
 
-问题原因：Android Studio 3.0 以上的版本容易出现此问题，Tinker 出现不兼容。
+#### 环境参数：
 
-问题解决：修改 Tinker Support 的版本：·`classpath "com.tencent.bugly:tinker-support:1.1.1"`
+*
+
+#### 问题分析：
+
+Android Studio 3.0 以上的版本容易出现此问题，Tinker 出现不兼容。
+
+#### 解决方法：
+
+修改 Tinker Support 的版本：·`classpath "com.tencent.bugly:tinker-support:1.1.1"`
 
 ```
 buildscript {
@@ -26,4 +34,3 @@ repositories {
     google()
 }
 ```
-
