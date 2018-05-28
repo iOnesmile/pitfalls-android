@@ -11,7 +11,9 @@
 
 **预览：GitBook [pitfalls-android @ GitBook](https://42chapters.gitbook.io/pitfalls-android/)**
 
-备注：GitBook 更新了新版样式，没有之前的样式好看，而且在 URL 路径上面的处理不太一样了，不像之前一样是通过你的文件夹和文件名来匹配，而是分析首行文字，如果是中文的话，会转化成中文对应的拼音，我觉得这个做法很难受，不喜欢这种“自以为是”的处理方式，相当于我们想要自定义 URL 的话，我的首行文字必须要和 URL 一样的内容。新用户注册 GitBook 已经是强制要求使用新的样式了，老用户如果你在组织底下点击升级到新的 GitBook，就回不去了。但是个人账号底下还是可以采用旧的样式，可以通过访问 legacy.gitbook.com 的方式来处理。新版本目前唯一的亮点就是增强了搜索功能。
+备注：GitBook 更新了新版样式，没有之前的样式好看（之前的样式参考：[http://android.developerdocumentation.cn](http://android.developerdocumentation.cn)），而且在 URL 路径上面的处理不太一样了，不像之前一样是通过你的文件夹和文件名来匹配，而是分析首行文字，如果是中文的话，会转化成中文对应的拼音，我觉得这个做法很难受，不喜欢这种“自以为是”的处理方式，相当于我们想要自定义 URL 的话，我的首行文字必须要和 URL 一样的内容。新用户注册 GitBook 已经是强制要求使用新的样式了，老用户如果你在组织底下点击升级到新的 GitBook，就回不去了。但是个人账号底下还是可以采用旧的样式，可以通过访问 legacy.gitbook.com 的方式来处理。新版本目前唯一的亮点就是增强了搜索功能。
+
+**后期我们可以在自己的服务器架设 GitBook 服务，采用之前的样式。**
 
 ![](/img/new-gitbook-search.png)
 
