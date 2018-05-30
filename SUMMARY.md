@@ -1,21 +1,4 @@
-# pitfalls-android
+# Table of contents
 
-* [序言](README.md)
-* [应用市场](app-store/README.md)
-	* [Google Play](app-store/google-play.md)
-	* [百度市场](app-store/baidu.md)
-       * [360市场](app-store/360.md)
-* [编程语言](programming-language/README.md)
-	* [Java](programming-language/java.md)
-	* [Kotlin](programming-language/kotlin.md)
-	* [Dart](programming-language/dart.md)
-* [IDE](ide/README.md)
-	* [Android Studio](ide/android-studio/README.md)
-		* [Gradle](ide/android-studio/gradle.md)
-* [SDK](sdk/README.md)
-	* [UI](sdk/ui.md)
-	* [异常](sdk/exception.md)
-	* [错误](sdk/error.md)
-* [Apk 安装包](apk/README.md)
-* [第三方库](third-party-library/README.md)
-	* [Tinker](third-party-library/tinker.md)  
+* Initial page
+
