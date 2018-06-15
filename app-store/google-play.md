@@ -56,12 +56,12 @@ https://play.google.com
 
 #### 问题分析：
 
-在打包APK时，没有把Log日志关掉。或者是buildTypes中release的配置出现问题。
+在打包APK时，没有把Log日志关掉。或者是BuildTypes中Release的配置出现问题。
 
 #### 解决方法：
 
-1、在打包release版本APK的情况下，需要关闭日志。
-2、如果在buildTypes中使用了多渠道分包技术，需要设置如：
+1、在打包Release版本APK的情况下，需要关闭日志。
+2、如果在BuildTypes中使用了多渠道分包技术，需要设置如：
 
 ```
 	buildTypes{
