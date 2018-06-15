@@ -46,3 +46,34 @@ https://play.google.com
 
 通过显式声明某项功能并加入 `android:required="false"` 属性，可以在 Google Play 上有效停用所有针对指定功能的过滤。
 
+### 3.Google Play 应用被拒提示：您上传了可调式的 APK 或 Android App Bundle。出于安全考虑，您需要先停用 APK 或 Android App Bundle 的调试功能，然后才能在 Google Play 中进行发布。
+
+#### 环境参数：
+
+```
+https://play.google.com
+```
+
+#### 问题分析：
+
+在打包 APK 时，没有把 Log 日志关掉。或者是 `buildTypes` 中 `release` 的配置出现问题。
+
+#### 解决方法：
+
+1、在打包 `release` 版本 APK 的情况下，需要关闭日志。
+
+2、如果在 `buildTypes` 中使用了多渠道分包技术，需要设置如：
+
+```
+buildTypes{
+		
+	demo.initWith(buildTypes.release)//打包前面时需要设置 release,调试时设置为 debug
+	demo{	
+			
+	}
+}
+```
+
+
+
+
