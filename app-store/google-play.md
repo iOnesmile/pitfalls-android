@@ -46,7 +46,7 @@ https://play.google.com
 
 通过显式声明某项功能并加入 `android:required="false"` 属性，可以在 Google Play 上有效停用所有针对指定功能的过滤。
 
-### 3.Google Play 应用被拒提示：您上传了可调式的 APK 或 Android App Bundle 。出于安全考虑，您需要先停用 APK 或 Android App Bundle 的调试功能，然后才能在 Google Play 中进行发布。
+### 3.Google Play 应用被拒提示：您上传了可调式的 APK 或 Android App Bundle。出于安全考虑，您需要先停用 APK 或 Android App Bundle 的调试功能，然后才能在 Google Play 中进行发布。
 
 #### 环境参数：
 
