@@ -56,7 +56,7 @@ https://play.google.com
 
 #### 问题分析：
 
-在打包APK时，没有把Log日志关掉。或者是 `buildTypes` 中 `release` 的配置出现问题。
+在打包 APK 时，没有把 Log 日志关掉。或者是 `buildTypes` 中 `release` 的配置出现问题。
 
 #### 解决方法：
 
