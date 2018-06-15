@@ -61,16 +61,17 @@ https://play.google.com
 #### 解决方法：
 
 1、在打包Release版本APK的情况下，需要关闭日志。
+
 2、如果在BuildTypes中使用了多渠道分包技术，需要设置如：
 
 ```
-	buildTypes{
+buildTypes{
 		
-		demo.initWith(buildTypes.release)//打包前面时需要设置release,调试时设置为debug
-		demo{	
+	demo.initWith(buildTypes.release)//打包前面时需要设置release,调试时设置为debug
+	demo{	
 			
-		}
 	}
+}
 ```
 
 
