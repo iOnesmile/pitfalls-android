@@ -1,4 +1,4 @@
-# Tencent
+# Tencent AI
 
 ### 1.java.lang.UnsatisfiedLinkError: No implementation found for void com.tencent.ai.sdk.jni.CommonInterface.aisdkSetQUA(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int) (tried Java_com_tencent_ai_sdk_jni_CommonInterface_aisdkSetQUA and Java_com_tencent_ai_sdk_jni_CommonInterface_aisdkSetQUA__Ljava_lang_String_2Ljava_lang_String_2Ljava_lang_String_2Ljava_lang_String_2Ljava_lang_String_2Ljava_lang_String_2Ljava_lang_String_2Ljava_lang_String_2I)
 
