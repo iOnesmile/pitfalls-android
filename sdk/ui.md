@@ -151,6 +151,28 @@ enterAnim.xml
 
 
 
+### 6. 带透明度的色值（ARGB）转换成不透明色值（RGB）
 
+#### 环境参数：
+
+*
+
+#### 问题分析：
+
+想象用一个白色透明的塑料袋遮住不同颜色的物体，看到背景泛白、塑料袋也有物体颜色，因此最终不透明色受背景色影响。这样就有一个简单的计算公式 `RGB = 前景色*透明度 + 背景色*(1-透明度)`，当然应先分解出 R、G、B 值，分别对每一项相乘，最后再组合。
+
+#### 解决方法：
+
+示例转换代码如下：
+
+```java
+// alpha 的最大值为 0xFF 表示完全不透明
+public static int convertColorAlpha(int color, int bgColor, int alpha) {
+    int red = Color.red(color)*alpha/0xFF + (Color.red(bgColor)*(0xFF-alpha))/0xFF;
+    int green = Color.green(color)*alpha/0xFF + (Color.green(bgColor)*(0xFF-alpha))/0xFF;
+    int blue = Color.blue(color)*alpha/0xFF + (Color.blue(bgColor)*(0xFF-alpha))/0xFF;
+    return Color.argb(0xFF, red, green, blue);
+}
+```
 
 
