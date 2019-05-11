@@ -174,5 +174,16 @@ public static int convertColorAlpha(int color, int bgColor, int alpha) {
     return Color.argb(0xFF, red, green, blue);
 }
 ```
+### 7. textview 跑马灯失效和出现抖动的解决方法
 
+#### 环境参数：
 
+TextView的直接父布局为约束布局，当TextView进行跑马灯效果的时候会抖动以及显示不全文字
+
+#### 问题分析：
+
+可能是约束布局与TextView存在焦点冲突
+
+#### 解决方法：
+
+将TextView外面包裹一层其他布局，比如帧布局等
